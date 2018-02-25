@@ -1,0 +1,27 @@
+{
+  "name": "time-manager",
+  "version": "1.0.0",
+  "description": "Time manager app built with Angular 1.6 for DEMO purpose",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/encode101/time-manager-app.git"
+  },
+  "keywords": [
+    "angular",
+    "angular",
+    "1.5"
+  ],
+  "author": "Rahul Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/encode101/time-manager-app/issues"
+  },
+  "homepage": "https://github.com/encode101/time-manager-app#readme",
+  "dependencies": {
+    "json-server": "git+https://github.com/typicode/json-server.git"
+  }
+}
