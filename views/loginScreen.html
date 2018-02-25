@@ -1,0 +1,20 @@
+<div style="height: 80vh">
+    <div class="flex-center flex-column">
+        
+		<form noValidate name="loginForm">
+		    <div class="md-form">
+		        <i class="fa fa-envelope prefix grey-text"></i>
+		        <input type="email" id="loginEmailId" required name="loginEmailId" ng-model="loginEmailId">
+		        <label for="loginEmailId">Your email</label> 
+		    </div>
+		    <div class="md-form">
+		        <i class="fa fa-lock prefix grey-text"></i>
+		        <input type="text" id="password" name="password" ng-model="password">
+		        <label for="password">Your password</label>
+		    </div>
+			<div class="text-center">
+		        <button class="btn btn-default" ng-disabled="!loginForm.$valid" ng-click="handelLogin()">Login</button>
+		    </div>
+	    </form>
+    </div>
+</div>

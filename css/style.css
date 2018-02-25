@@ -1,0 +1,10 @@
+/* Your custom styles */
+
+.nav-link, .navbar-brand{padding: 0px 20px!important; margin:0px;}
+.margin-left-100{margin-left: 50px;}
+.navIcons{font-size: 25px; padding:10px 0px 0 0;}
+.alignCenter{text-align: center; color: red;}
+.navbar {margin: 1px 0 20px 0px;}
+.error{color: maroon;}
+.infoIcon{margin-right: 10px; color:#6699CC; font-weight: normal;}
+.endTimeSelect{ padding: 5px 10px;}

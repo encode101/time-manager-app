@@ -1,0 +1,96 @@
+<nav-bar></nav-bar>
+<div class="card">
+    <div class="card-header primary-color lighten-4 white-text">Add Task</div>
+    <div class="card-body">
+        <form class="md-form" name="taskForm">    
+		    <div class="mt-2 w-100 d-inline-block">
+		        <input type="text" name="taskDescription" required="required" class="form-control" id="taskDescription" ng-model="task.taskDescription">
+		        <label for="taskDescription">Description</label>
+		    </div>
+		    <div class="mt-2 col-md-4 d-inline-block">
+				<span>Date</span>
+				<input type="date" name="taskDate" ng-model="task.taskDate" />
+			</div>
+
+			<div class="mt-2 col-md-4 d-inline-block">
+				<span>Start Time</span><br/>
+				<select class="endTimeSelect" required="required" name="startTime" ng-model="task.startDate" ng-options="hour.hourValue as hour.hourName for hour in hours" ng-change="updateEndTime()" >
+					<option value="" selected="selected" disabled="disabled">Select Start Time</option>
+				</select>
+			</div>
+			<div class="mt-0 col-md-3 d-inline-block">
+				<span>End Time</span><br/>
+				<select required="required" class="endTimeSelect" name="startTime" ng-model="task.endDate" ng-options="hour.hourValue as hour.hourName for hour in endHours">
+					<option value="" selected="selected" disabled="disabled">Select End Time</option>
+				</select>
+			</div>
+			<div class="clearFix"></div>
+			<div class="mt-2 col-md-4 d-inline-block">
+				<span>Type Of Work</span>
+				<select name="TypeOfWork" class="form-control" id="typeOfWork" required="required" ng-model="task.typeOfWork">
+					<option value="" selected="selected" disabled="disabled">Choose An Option</option>
+					<option value="1">Added</option>
+					<option value="2">Fixed</option>
+					<option value="3">Explored</option>
+					<option value="4">Brain Storm</option>
+		    	</select>
+		    </div>
+			<div class="mt-2 col-md-4 d-inline-block">
+				<span>Client</span>
+				<select class="form-control" 
+					id="clientId" 
+					ng-model="task.clientId" 
+					ng-change="updateProjectList()"
+					 required="required"
+					ng-options="client.id as client.clientName for client in clientList">					
+		    	</select>	
+			</div>
+			<div class="mt-3 col-md-3 d-inline-block">
+				<span>Project</span>
+				<select class="form-control" id="projectName" required="required" ng-model="task.projectName" ng-change="updateSelectedProject()"
+				ng-options="project.id as project.projectName for project in projectList">
+				<option value="" selected="selected" disabled="disabled">Choose An Option</option>
+		    	</select>
+		    	<i ng-show="!task.clientId">Can be selected only after client selection</i>
+			</div>
+			<hr>
+			<div class="error">All Fields Are Required</div>
+			<div class="mt-2 col-md-2 d-inline-block pull-right">
+				<button type="button" class="btn btn-success mask rgba-white-slight" ng-disabled="taskForm.$invalid" ng-click="createTask()">&nbsp;Add&nbsp;</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<br />
+
+<!-- Report Panel  -->
+
+<div class="card">
+    <div class="card-header primary-color lighten-1 white-text">Project Status</div>
+    <div class="card-body">
+    	<table class="table table-hover">
+		 <thead class="">
+	        <tr>
+	            <th>Date</th>
+	            <th>Description</th>
+	            <th>Client</th>
+	            <th>Project Name</th>
+	            <th>Total Time Spent</th>
+	        </tr>
+	    </thead>
+    <tbody>
+    	<tr>
+    		<td colspan="5" ng-show="taskList.length==0" class="alignCenter"><h5> No tasks added yet for any project</h5></td>
+    	</tr>
+        <tr  ng-hide="!taskList" class="table-stripped" ng-repeat="task in taskList" sortBy:'clientName' >
+            <th scope="row">{{task.taskDate | date}}</th>
+            <td>{{task.taskDescription}}</td>
+            <td>{{task.clientName}}</td>
+            <td>{{task.selectedProjectName}}</td>
+            <td>{{task.timeTaken}}</td>
+        </tr>
+    </tbody>
+    	</table>
+</div>
+</div>

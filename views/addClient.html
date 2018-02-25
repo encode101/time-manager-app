@@ -1,0 +1,67 @@
+<nav-bar></nav-bar>
+<div class="card">
+    <div class="card-header primary-color lighten-1 white-text">Add Client</div>
+    <div class="card-body">
+    	<form name="addClientForm">
+    		<div class="row">
+    			<div class="col-md-6">
+		    		<div class="md-form mt-2 w-100 d-inline-block">
+					    <input type="text" required="required" id="clientName" class="form-control" ng-model="addClient.clientName">
+					    <label for="clientName" >Client Name</label>
+					</div>
+					<div class="md-form mt-2 w-100 d-inline-block">
+					    <input type="text" required="required" id="projectName" class="form-control" ng-model="addClient.projectName">
+					    <label for="projectName" >Project Name</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+		    		<div class="md-form mt-2 w-100 d-inline-block">
+					    <input type="text" required="required" id="projectManager" class="form-control" ng-model="addClient.projectManager">
+					    <label for="projectManager" >Project Manager (Client)</label>
+					</div>
+					<div class="md-form mt-2 w-100 d-inline-block">
+					    <input type="text" required="required" id="accountManager" class="form-control" ng-model="addClient.accountManager">
+					    <label for="accountManager" >Account Manager (Koru)</label>
+					</div>
+				</div>
+			</div>
+			<div class="error">All Fields Are Required</div>
+			<div class="row">
+				<div class="col">
+				<button type="button" class="btn btn-success pull-right" ng-disabled="addClientForm.$invalid" ng-click="createClient()">&nbsp;Add Client&nbsp;</button>
+			</div>
+			</div>
+    	</form>
+    </div>
+   </div>
+
+   <!-- Report Panel  -->
+
+<div class="card">
+    <div class="card-header primary-color lighten-1 white-text">Project Status</div>
+    <div class="card-body">
+    	<table class="table table-hover">
+		 <thead class="">
+	        <tr>
+	            <th>#</th>
+	            <th>Client</th>
+	            <th>Project Name</th>
+	            <th>Project Manager</th>
+	            <th>Account Manager</th>
+	        </tr>
+	    </thead>
+    <tbody>
+    	<tr>
+    		<td colspan="5" ng-show="clientList.length==0" class="alignCenter"><h5> No Clients added yet</h5></td>
+    	</tr>
+        <tr ng-hide="!clientList" class="table-stripped" ng-repeat="client in clientList">
+            <th>{{client.id}}</th>
+            <td>{{client.clientName}}</td>
+            <td>{{client.projectName}}</td>
+            <td>{{client.projectManager}}</td>
+         	<td>{{client.accountManager}}</td>
+        </tr>
+    </tbody>
+    	</table>
+</div>
+</div>	

@@ -1,0 +1,1 @@
+var timeManager = new angular.module("timeManager",['ngRoute', 'angular.filter']);
