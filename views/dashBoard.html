@@ -1,32 +1,33 @@
 <nav-bar></nav-bar>
+<div class="col-md-10 offset-md-1">
 <div class="card">
-    <div class="card-header primary-color lighten-4 white-text">Add Task</div>
+    <div class="card-header primary-color lighten-4 white-text"><h5>Add Task</h5></div>
     <div class="card-body">
         <form class="md-form" name="taskForm">    
 		    <div class="mt-2 w-100 d-inline-block">
 		        <input type="text" name="taskDescription" required="required" class="form-control" id="taskDescription" ng-model="task.taskDescription">
-		        <label for="taskDescription">Description</label>
+		        <label for="taskDescription">Description <div class="error">*</div></label>
 		    </div>
 		    <div class="mt-2 col-md-4 d-inline-block">
-				<span>Date</span>
+				<span>Date <div class="error">*</div></span>
 				<input type="date" name="taskDate" ng-model="task.taskDate" />
 			</div>
 
 			<div class="mt-2 col-md-4 d-inline-block">
-				<span>Start Time</span><br/>
+				<span>Start Time <div class="error">*</div></span><br/>
 				<select class="endTimeSelect" required="required" name="startTime" ng-model="task.startDate" ng-options="hour.hourValue as hour.hourName for hour in hours" ng-change="updateEndTime()" >
 					<option value="" selected="selected" disabled="disabled">Select Start Time</option>
 				</select>
 			</div>
 			<div class="mt-0 col-md-3 d-inline-block">
-				<span>End Time</span><br/>
+				<span>End Time <div class="error">*</div></span><br/>
 				<select required="required" class="endTimeSelect" name="startTime" ng-model="task.endDate" ng-options="hour.hourValue as hour.hourName for hour in endHours">
 					<option value="" selected="selected" disabled="disabled">Select End Time</option>
 				</select>
 			</div>
 			<div class="clearFix"></div>
 			<div class="mt-2 col-md-4 d-inline-block">
-				<span>Type Of Work</span>
+				<span>Type Of Work <div class="error">*</div></span>
 				<select name="TypeOfWork" class="form-control" id="typeOfWork" required="required" ng-model="task.typeOfWork">
 					<option value="" selected="selected" disabled="disabled">Choose An Option</option>
 					<option value="1">Added</option>
@@ -36,7 +37,7 @@
 		    	</select>
 		    </div>
 			<div class="mt-2 col-md-4 d-inline-block">
-				<span>Client</span>
+				<span>Client <div class="error">*</div></span>
 				<select class="form-control" 
 					id="clientId" 
 					ng-model="task.clientId" 
@@ -46,7 +47,7 @@
 		    	</select>	
 			</div>
 			<div class="mt-3 col-md-3 d-inline-block">
-				<span>Project</span>
+				<span>Project <div class="error">*</div></span>
 				<select class="form-control" id="projectName" required="required" ng-model="task.projectName" ng-change="updateSelectedProject()"
 				ng-options="project.id as project.projectName for project in projectList">
 				<option value="" selected="selected" disabled="disabled">Choose An Option</option>
@@ -54,20 +55,19 @@
 		    	<i ng-show="!task.clientId">Can be selected only after client selection</i>
 			</div>
 			<hr>
-			<div class="error">All Fields Are Required</div>
-			<div class="mt-2 col-md-2 d-inline-block pull-right">
-				<button type="button" class="btn btn-success mask rgba-white-slight" ng-disabled="taskForm.$invalid" ng-click="createTask()">&nbsp;Add&nbsp;</button>
+			<div class="error">* Fields Are Required</div>
+			<div class="col-md-3 d-inline-block pull-right">
+				<button type="button" class="btn btn-success mask rgba-white-slight" ng-disabled="taskForm.$invalid" ng-click="createTask()">&nbsp;Add Task&nbsp;</button>
 			</div>
 		</form>
 	</div>
 </div>
 
 <br />
-
 <!-- Report Panel  -->
 
 <div class="card">
-    <div class="card-header primary-color lighten-1 white-text">Project Status</div>
+    <div class="card-header primary-color lighten-1 white-text"><h5>Project Status</h5></div>
     <div class="card-body">
     	<table class="table table-hover">
 		 <thead class="">
@@ -92,5 +92,6 @@
         </tr>
     </tbody>
     	</table>
+</div>
 </div>
 </div>

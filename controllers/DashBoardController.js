@@ -1,22 +1,12 @@
 var DashBoardController = timeManager.controller('DashBoardController', function($scope, $filter, LoginService, $location, UtilityService, TaskService){
-
-	$scope.task = {
-		taskDate: new Date()
-		/*startDate: null;
-		endDate:  new Date(),
-		taskDate: new Date()*/
-	}
+	
+	/* Initializing scope variables */
 
 	$scope.hours = [];
 	$scope.endHours  =[];
 	$scope.minutes = [];
 
-
-	$scope.dateObj = {
-		hours: "",
-		minutes: "",
-		seconds: ""
-	}
+	/* _Private Utility Function */
 
 	var _loopDate = function(hours){
 		let hourName = hours+ " AM"
@@ -29,32 +19,31 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 			else if(hours == 0){
 				hourName = "00 AM";
 			}
-			return hourName
-		}
+		return hourName
+	}
 
-	var _populateDateFields = function(){
+	var _populateDateFields = (function(){
+		$scope.task = {
+			taskDate: new Date()
+		}	
 		for(var hours = 0; hours <= 23; hours++){
 			var hourName = _loopDate(hours)
 			$scope.hours.push({'hourName': hourName, 'hourValue': hours});
 		}			
-	}
+	})()
 
+	/*	Show Only Remainaing Hours Of The Day Once The Start Time Is Selected */
 
 	$scope.updateEndTime = function(){
 		$scope.endHours = [];
-		for(var hours = $scope.task.startDate; hours <= 24; hours++){
+		for(var hours = $scope.task.startDate+1; hours <= 24; hours++){
 			if(hours == 24){
 				return $scope.endHours.push({'hourName': "00 AM", 'hourValue': 24});
 			};
 			var hourName = _loopDate(hours)
-
 			$scope.endHours.push({'hourName': hourName, 'hourValue': hours});
 		}
 	}
-
-	_populateDateFields();
-
-	$scope.clientId = "";
 
 	UtilityService.getClientList()
 	.then(function(data){
@@ -68,16 +57,9 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 	}, function(err){
 		console.log(err)
 	});
-	
-	var getUTCDate = function(selectedDate, moment){		
-		return Date.parse(selectedDate, moment);
-	}
-	
-	$scope.updateDateObj = function(moment){
-		/*let momentDate = $scope.task[moment];
-		$scope.task[moment] = getUTCDate(momentDate, moment);*/
-	}
 
+	/* Update Project List On Each Client Selection */
+	
 	$scope.updateProjectList = function(){
 		UtilityService.getProjectList($scope.task.clientId)
 		.then(function(data){
@@ -85,49 +67,60 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 			if($scope.projectList.length == 0){
 				return;
 			}
-			/*$scope.task.projectName = $scope.projectList[0].id;
-			$scope.task.selectedProjectName = $scope.projectList[0].projectName;*/
 
 			/* Check client Name From Client List */
+
 			$scope.clientList.map(item =>{
 				if(item.id == $scope.task.clientId){
 					$scope.task.clientName = item.name;
 				}
-			})
+			});
+			$scope.updateSelectedProject();
 		}, function(err){
 			console.log(err);
 		});
 	}
 
 	$scope.updateSelectedProject = function(){
+		
+		/* Avoiding Unnessary Loop, While Loadin The Page*/
+
+		if($scope.projectList.length == 0){
+			return;
+		}
+
+		/* Set Scope Values Based On Selected Project */
+
 		$scope.projectList.map(item => {
 			if(item.id == $scope.task.projectName){
 				$scope.task.selectedProjectName = item.projectName;
 				$scope.task.projectId = item.id;
 				$scope.task.clientName = item.clientName;
+				$scope.task.billableTime = item.billableTime;
 			}
 		})
 	}
 
+	/* Service Call for Creating A Task */
+
 	$scope.createTask = function(){
 		TaskService.getTimeLogged($scope.task.projectId)
 			.then(function(timeLogged){
-				alert($scope.task.timeTaken)
-				if($scope.task.timeTaken !== undefined || $scope.task.timeTaken !== null){
-					$scope.task.timeTaken = ($scope.task.endDate-$scope.task.startDate) + $scope.task.billableTime;	
-				} else{
-					$scope.task.timeTaken = 0;
-				}
-				
+					if($scope.task.billableTime == undefined)
+						$scope.task.billableTime = 0;
+					$scope.task.timeTaken = ($scope.task.endDate-$scope.task.startDate) + $scope.task.billableTime;
 				TaskService.createTask($scope.task).
 				then(function(data){
 					$scope.getTaskList();
+					$scope.updateProjectList();
 					return false;
 				}, function(err){
 					console.log("err");
 			})
 		});	
 	}
+
+	/* Get The Task List For Display */
 
 	$scope.getTaskList = function(){
 		TaskService.getTaskList().
@@ -137,10 +130,7 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 			console.log("err");
 		})
 	}
-	$scope.getTaskList()
-})
-.directive('sayHello', function(){
-	return {
-		template: "sddsd"
-	}
+
+	$scope.getTaskList();
+
 })

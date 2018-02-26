@@ -1,31 +1,32 @@
 <nav-bar></nav-bar>
+<div class="col-md-10 offset-md-1">
 <div class="card">
-    <div class="card-header primary-color lighten-1 white-text">Add Client</div>
+    <div class="card-header primary-color lighten-1 white-text"><h5>Add Client</h5></div>
     <div class="card-body">
     	<form name="addClientForm">
     		<div class="row">
     			<div class="col-md-6">
 		    		<div class="md-form mt-2 w-100 d-inline-block">
 					    <input type="text" required="required" id="clientName" class="form-control" ng-model="addClient.clientName">
-					    <label for="clientName" >Client Name</label>
+					    <label for="clientName" >Client Name <div class="error">*</div></label>
 					</div>
 					<div class="md-form mt-2 w-100 d-inline-block">
 					    <input type="text" required="required" id="projectName" class="form-control" ng-model="addClient.projectName">
-					    <label for="projectName" >Project Name</label>
+					    <label for="projectName" >Project Name <div class="error">*</div></label>
 					</div>
 				</div>
 				<div class="col-md-6">
 		    		<div class="md-form mt-2 w-100 d-inline-block">
 					    <input type="text" required="required" id="projectManager" class="form-control" ng-model="addClient.projectManager">
-					    <label for="projectManager" >Project Manager (Client)</label>
+					    <label for="projectManager" >Project Manager (Client) <div class="error">*</div></label>
 					</div>
 					<div class="md-form mt-2 w-100 d-inline-block">
 					    <input type="text" required="required" id="accountManager" class="form-control" ng-model="addClient.accountManager">
-					    <label for="accountManager" >Account Manager (Koru)</label>
+					    <label for="accountManager" >Account Manager (Koru) <div class="error">*</div></label>
 					</div>
 				</div>
 			</div>
-			<div class="error">All Fields Are Required</div>
+			<div class="error">* Fields Are Required</div>
 			<div class="row">
 				<div class="col">
 				<button type="button" class="btn btn-success pull-right" ng-disabled="addClientForm.$invalid" ng-click="createClient()">&nbsp;Add Client&nbsp;</button>
@@ -34,11 +35,11 @@
     	</form>
     </div>
    </div>
-
+<br/>
    <!-- Report Panel  -->
 
 <div class="card">
-    <div class="card-header primary-color lighten-1 white-text">Project Status</div>
+    <div class="card-header primary-color lighten-1 white-text"><h5>Our Clients</h5></div>
     <div class="card-body">
     	<table class="table table-hover">
 		 <thead class="">
@@ -65,3 +66,4 @@
     	</table>
 </div>
 </div>	
+</div>
