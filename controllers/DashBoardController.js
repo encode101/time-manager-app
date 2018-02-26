@@ -5,6 +5,7 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 	$scope.hours = [];
 	$scope.endHours  =[];
 	$scope.minutes = [];
+	$scope.clientPresent = false;
 
 	/* _Private Utility Function */
 
@@ -45,6 +46,11 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 		}
 	}
 
+$("#alert-target").click(function () {
+    toastr["info"]("I was launched via jQuery!")
+});
+
+
 	UtilityService.getClientList()
 	.then(function(data){
 		$scope.clientList = data.data;
@@ -67,6 +73,8 @@ var DashBoardController = timeManager.controller('DashBoardController', function
 			if($scope.projectList.length == 0){
 				return;
 			}
+
+			$scope.clientPresent = true;
 
 			/* Check client Name From Client List */
 

@@ -1,43 +1,6 @@
 {
-  "clients": [
-    {
-      "clientName": "Google India",
-      "projectName": "AI & Machine Learning",
-      "projectManager": "Rahul Mishra",
-      "accountManager": "Raghav Mishra",
-      "id": 1
-    },
-    {
-      "clientName": "Yahoo India",
-      "projectName": "Yahoo Maps Automation",
-      "projectManager": "Rahul Mishra",
-      "accountManager": "Raghav Mishra",
-      "id": 2
-    }
-  ],
-  "projects": [
-    {
-      "clientId": 1,
-      "clientName": "Google India",
-      "projectName": "AI & Machine Learning",
-      "billableTime": 0,
-      "id": 1
-    },
-    {
-      "clientId": 1,
-      "clientName": "Google India",
-      "projectName": "Search Algorithim Optimization",
-      "billableTime": 0,
-      "id": 2
-    },
-    {
-      "clientId": 2,
-      "clientName": "Yahoo India",
-      "projectName": "Yahoo Maps Automation",
-      "billableTime": 0,
-      "id": 3
-    }
-  ],
+  "clients": [],
+  "projects": [],
   "category": [
     {
       "name": "Development",

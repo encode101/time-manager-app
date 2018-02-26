@@ -3,7 +3,9 @@
 <div class="card">
     <div class="card-header primary-color lighten-4 white-text"><h5>Add Task</h5></div>
     <div class="card-body">
-        <form class="md-form" name="taskForm">    
+    	<div class="alignCenter" ng-if="!clientPresent"><br/>You Need to Add Clients & Projects Before You Can Add A Task. <br/><br/><strong><a class="btn btn-primary" href="./#!/client">Add Client</a></strong></div>	
+        <form class="md-form" name="taskForm">
+        	 <fieldset ng-if="clientPresent">
 		    <div class="mt-2 w-100 d-inline-block">
 		        <input type="text" name="taskDescription" required="required" class="form-control" id="taskDescription" ng-model="task.taskDescription">
 		        <label for="taskDescription">Description <div class="error">*</div></label>
@@ -52,13 +54,13 @@
 				ng-options="project.id as project.projectName for project in projectList">
 				<option value="" selected="selected" disabled="disabled">Choose An Option</option>
 		    	</select>
-		    	<i ng-show="!task.clientId">Can be selected only after client selection</i>
 			</div>
 			<hr>
 			<div class="error">* Fields Are Required</div>
 			<div class="col-md-3 d-inline-block pull-right">
 				<button type="button" class="btn btn-success mask rgba-white-slight" ng-disabled="taskForm.$invalid" ng-click="createTask()">&nbsp;Add Task&nbsp;</button>
 			</div>
+		</fieldset>
 		</form>
 	</div>
 </div>
@@ -66,7 +68,7 @@
 <br />
 <!-- Report Panel  -->
 
-<div class="card">
+<div class="card" ng-if="clientPresent">
     <div class="card-header primary-color lighten-1 white-text"><h5>Project Status</h5></div>
     <div class="card-body">
     	<table class="table table-hover">
